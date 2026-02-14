@@ -272,6 +272,33 @@ body {
   border-top: 1px solid rgba(255,255,255,0.05);
   font-size: 13px;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-nav {
+  margin-top: auto;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 13px;
+}
+
+.footer-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer-nav a:hover {
+  color: white;
+}
+
 
 
 
