@@ -92,16 +92,18 @@ if (totalIncome === 0) {
 }
 
 function resetAll() {
-  document.getElementById("income").value = "";
-  document.getElementById("mha").value = "";
-  document.getElementById("rent").value = "";
-  document.getElementById("expenses").value = "";
-  document.getElementById("rentAdvice").innerText = "";
+    document.getElementById("income").value = "";
+    document.getElementById("mha").value = "";
+    document.getElementById("rent").value = "";
+    document.getElementById("expenses").value = "";
+    document.getElementById("rentAdvice").innerText = "";
 
-  let resultEl = document.getElementById("result").value = "0";
+    let resultEl = document.getElementById("result");
+
+    resultEl.innerText = "$0";
+    resultEl.className = "neutral";
 }
-  resultEl.innerText = "";
-  resultEl.className = "neutral";
+
 
   document.getElementById("message").innerHTML = "";
   document.getElementById("savings").innerText = "";
@@ -132,5 +134,6 @@ document.getElementById("school").onchange = function() {
     }, 1000);
   }
 };
+
 
 
