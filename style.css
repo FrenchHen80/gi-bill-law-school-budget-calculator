@@ -19,12 +19,23 @@
 
 * { box-sizing: border-box; }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background: radial-gradient(900px 500px at 20% 10%, rgba(99,102,241,0.15), transparent 60%),
+              radial-gradient(900px 500px at 80% 20%, rgba(16,185,129,0.12), transparent 60%),
+              var(--bg);
+}
+
 body {
+   
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: radial-gradient(1200px 600px at 20% -10%, rgba(99,102,241,0.25), transparent 60%),
-              radial-gradient(1000px 500px at 90% 10%, rgba(16,185,129,0.18), transparent 55%),
-              var(--bg);
+  background: var(--bg);
   color: var(--text);
 }
 
@@ -421,6 +432,7 @@ html, body {
   font-size: 12px;
   color: #666;
 }
+
 
 
 
