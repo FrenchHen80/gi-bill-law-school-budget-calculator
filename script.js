@@ -1,11 +1,11 @@
-const mhaData = {
-  udm: 2200,
-  umich: 2400,
-  wayne: 2100,
-  msu: 1800
-};
+// --- MHA DATA (dropdown values must match these keys) ---
+
+// --- Helpers ---
 function money(n) {
-  return "$" + n.toLocaleString("en-US");
+  // keep negative signs readable
+  const sign = n < 0 ? "-" : "";
+  const abs = Math.abs(Math.round(n));
+  return sign + "$" + abs.toLocaleString("en-US");
 }
 
 function pct(part, total) {
@@ -13,76 +13,88 @@ function pct(part, total) {
   return Math.round((part / total) * 100) + "%";
 }
 
+// --- Main calculate ---
 function calculate() {
-// 🔥 TRACK EVENT
-   gtag('event', 'calculate_click', {
-      'event_category': 'engagement',
-      'event_label': 'calculator used'
-   });
-  
-  let income = Number(document.getElementById("income").value) || 0;
-  let mha = Number(document.getElementById("mha").value) || 0;
-  let rent = Number(document.getElementById("rent").value) || 0;
-  let expenses = Number(document.getElementById("expenses").value) || 0;
+  // Track event (guard so it doesn't crash if gtag isn't loaded yet)
+  if (typeof gtag === "function") {
+    gtag("event", "calculate_click", {
+      event_category: "engagement",
+      event_label: "calculator used"
+    });
+  }
 
-  let totalIncome = income + mha;
-  let totalSpent = rent + expenses;
-  let remaining = totalIncome - totalSpent;
+  const income = Number(document.getElementById("income").value) || 0;
+  const mha = Number(document.getElementById("mha").value) || 0;
+  const rent = Number(document.getElementById("rent").value) || 0;
+  const expenses = Number(document.getElementById("expenses").value) || 0;
 
-  let resultEl = document.getElementById("result");
-  resultEl.innerText = money(remaining);
+  const totalIncome = income + mha;
+  const totalSpent = rent + expenses;
+  const remaining = totalIncome - totalSpent;
 
-  resultEl.className = "neutral";
-  if (remaining > 0) resultEl.className = "positive";
-  if (remaining < 0) resultEl.className = "negative";
-  
-  let msg = document.getElementById("message");
+  // Money Left output
+  const resultEl = document.getElementById("result");
+  resultEl.textContent = money(remaining);
 
- if (remaining > 0) {
-    msg.innerText = "You are within budget.";
+  // IMPORTANT: keep your base class + status class
+  // (Your HTML shows: class="value neutral")
+  resultEl.className = "value neutral";
+  if (remaining > 0) resultEl.className = "value positive";
+  if (remaining < 0) resultEl.className = "value negative";
+
+  // Message
+  const msg = document.getElementById("message");
+  msg.className = ""; // reset any previous class
+
+  if (remaining > 0) {
+    msg.textContent = "You are within budget.";
     msg.className = "good";
   } else if (remaining < 0) {
-    msg.innerText = "Warning: You are overspending.";
+    msg.textContent = "Warning: You are overspending.";
     msg.className = "bad";
   } else {
-    msg.innerText = "You are breaking even.";
+    msg.textContent = "You are breaking even.";
     msg.className = "ok";
   }
 
-  let savingsEl = document.getElementById("savings");
+  // Savings rate
+  const savingsEl = document.getElementById("savings");
+  savingsEl.className = "";
 
-if (totalIncome === 0) {
-  savingsEl.innerText = "";
-} else {
-  let rate = Math.round((remaining / totalIncome) * 100);
-
-  if (remaining >= 0) {
-    savingsEl.innerText = "Savings Rate: " + rate + "%";
+  if (totalIncome === 0) {
+    savingsEl.textContent = "";
   } else {
-    savingsEl.innerText = "Shortfall: " + Math.abs(rate) + "% of income";
+    const rate = Math.round((remaining / totalIncome) * 100);
+
+    if (remaining >= 0) {
+      savingsEl.textContent = "Savings Rate: " + rate + "%";
+    } else {
+      savingsEl.textContent = "Shortfall: " + Math.abs(rate) + "% of income";
+    }
   }
 
-let rentAdvice = document.getElementById("rentAdvice");
+  // Rent advice
+  const rentAdvice = document.getElementById("rentAdvice");
+  rentAdvice.className = "";
 
-if (totalIncome === 0) {
-  rentAdvice.innerText = "";
-} else {
-  let rentPct = (rent / totalIncome) * 100;
-
-  if (rentPct > 40) {
-    rentAdvice.innerText = "Warning: Rent is above 40% of income.";
-    rentAdvice.className = "bad";
-  } else if (rentPct > 30) {
-    rentAdvice.innerText = "Caution: Rent is moderately high.";
-    rentAdvice.className = "ok";
+  if (totalIncome === 0) {
+    rentAdvice.textContent = "";
   } else {
-    rentAdvice.innerText = "Rent is within a healthy range.";
-    rentAdvice.className = "good";
+    const rentPct = (rent / totalIncome) * 100;
+
+    if (rentPct > 40) {
+      rentAdvice.textContent = "Warning: Rent is above 40% of income.";
+      rentAdvice.className = "bad";
+    } else if (rentPct > 30) {
+      rentAdvice.textContent = "Caution: Rent is moderately high.";
+      rentAdvice.className = "ok";
+    } else {
+      rentAdvice.textContent = "Rent is within a healthy range.";
+      rentAdvice.className = "good";
+    }
   }
-}
 
-}
-
+  // Breakdown (uses innerHTML intentionally)
   document.getElementById("breakdown").innerHTML = `
     <p>Total Income: <strong>${money(totalIncome)}</strong></p>
     <p>Total Spent: <strong>${money(totalSpent)}</strong> (${pct(totalSpent, totalIncome)} of income)</p>
@@ -90,33 +102,37 @@ if (totalIncome === 0) {
     <p>Other Expenses: <strong>${money(expenses)}</strong> (${pct(expenses, totalIncome)} of income)</p>
   `;
 }
+
+// --- Reset ---
 function resetAll() {
   document.getElementById("income").value = "";
   document.getElementById("mha").value = "";
   document.getElementById("rent").value = "";
   document.getElementById("expenses").value = "";
 
-  const resultEl = document.getElementById("result");
-  resultEl.textContent = "";                 // or "$0" if you want a default
-  resultEl.className = "value neutral";
-
-  document.getElementById("message").textContent = "";
-  document.getElementById("savings").textContent = "";
-  document.getElementById("breakdown").innerHTML = "";   // important
-  document.getElementById("rentAdvice").textContent = "";
-
   // Optional: reset dropdown too
   // document.getElementById("school").value = "";
+
+  const resultEl = document.getElementById("result");
+  resultEl.textContent = "";
+  resultEl.className = "value neutral";
+
+  const msg = document.getElementById("message");
+  msg.textContent = "";
+  msg.className = "";
+
+  const savingsEl = document.getElementById("savings");
+  savingsEl.textContent = "";
+  savingsEl.className = "";
+
+  const rentAdvice = document.getElementById("rentAdvice");
+  rentAdvice.textContent = "";
+  rentAdvice.className = "";
+
+  document.getElementById("breakdown").innerHTML = "";
 }
 
-   
-}
-
-
- 
-}
-
-// Click handlers
+// --- Click handlers ---
 document.getElementById("calcBtn").onclick = calculate;
 document.getElementById("resetBtn").onclick = resetAll;
 
@@ -124,25 +140,19 @@ document.getElementById("resetBtn").onclick = resetAll;
 document.addEventListener("keydown", function (e) {
   if (e.key === "Enter") calculate();
 });
-document.getElementById("school").onchange = function() {
-    let school = this.value;
-    let mhaInput = document.getElementById("mha");
 
-    if (mhaData[school]) {
-     mhaInput.value = mhaData[school];
+// Dropdown sets MHA
+document.getElementById("school").onchange = function () {
+  const school = this.value;
+  const mhaInput = document.getElementById("mha");
+
+  if (mhaData[school] !== undefined) {
+    mhaInput.value = mhaData[school];
 
     // Add highlight
-     mhaInput.classList.add("highlight");
-
-    // Remove highlight after 1 second
+    mhaInput.classList.add("highlight");
     setTimeout(() => {
       mhaInput.classList.remove("highlight");
     }, 1000);
   }
 };
-
-
-
-
-
-
