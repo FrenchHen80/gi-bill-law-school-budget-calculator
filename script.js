@@ -96,18 +96,22 @@ function resetAll() {
     document.getElementById("mha").value = "";
     document.getElementById("rent").value = "";
     document.getElementById("expenses").value = "";
-    document.getElementById("rentAdvice").innerText = "";
+    
 
-    let resultEl = document.getElementById("result");
+    const resultEl = document.getElementById("result");
+    resultEl.textContent = "";
+    resultEl.className = "value neutral";
 
     resultEl.innerText = "$0";
-    resultEl.className = "neutral";
+  document.getElementById("message").textContent = "";
+  document.getElementById("savings").textContent = "";
+  document.getElementById("breakdown").textContent = "";
+  document.getElementById("rentAdvice").textContent = "";
+   
 }
 
 
-  document.getElementById("message").innerHTML = "";
-  document.getElementById("savings").innerText = "";
-  document.getElementById("breakdown").innerText = "";
+ 
 }
 
 // Click handlers
@@ -134,6 +138,7 @@ document.getElementById("school").onchange = function() {
     }, 1000);
   }
 };
+
 
 
 
