@@ -2,48 +2,77 @@
 <html>
 <head>
     <title>GI Bill Law School Budget Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
  <div class="container">
-  
- <h1>GI Bill Law School Budget Calculator</h1>
+    <div class="card">
 
- <p class="subtitle">
-  Estimate your monthly budget using GI Bill housing allowance and expenses
-</p>
+      <header class="header">
+        <h1>GI Bill Law School Budget Calculator</h1>
+        <p class="subtitle">Estimate your monthly budget using GI Bill housing allowance and expenses.</p>
+      </header>
 
-  <div class="row">
-    <label for="income">Monthly Income:</label>
-    <input type="number" id="income" placeholder="e.g., 2000">
+      <div class="school-box">
+       <label for="school">Select your Law School</label>
+       <select id="school">
+         <option value="">-- Choose a School --</option>
+         <option value="udm">University of Detroit Mercy</option>
+         <option value="umich">University of Michigan</option>
+         <option value="wayne">Wayne State</option>
+         <option value="msu">Michigan State</option>
+     </select>
+     <small class="helper">Used to estimate your monthly housing allowance (MHA)</small>
+    </div>
+
+      <div class="grid">
+        <div class="row">
+          <label for="income">Monthly Income</label>
+          <input type="number" id="income" placeholder="0" inputmode="numeric">
+        </div>
+
+        <div class="row">
+           <label for="mha">GI Bill / MHA</label>
+           <input type="number" id="mha" placeholder="0" inputmode="numeric">
+           <small class="helper">Based on selected school's ZIP code</small>
+        </div>
+
+        <div class="row">
+          <label for="rent">Rent</label>
+          <input type="number" id="rent" placeholder="0" inputmode="numeric">
+        </div>
+
+        <div class="row">
+          <label for="expenses">Other Expenses</label>
+          <input type="number" id="expenses" placeholder="0" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button id="calcBtn" class="btn primary">Calculate</button>
+        <button id="resetBtn" class="btn ghost">Reset</button>
+      </div>
+
+      <div class="results">
+        <div class="moneyline">
+          <div class="label">Money Left</div>
+          <div id="result" class="value neutral"></div>
+        </div>
+
+        <div class="status">
+          <p id="message"></p>
+          <p id="savings"></p>
+        </div>
+
+        <div id="breakdown" class="breakdown"></div>
+      </div>
+    </div>
+
+    <footer class="footer">Built by a 1L • v1</footer>
   </div>
-
-  <div class="row">
-    <label for="mha">GI Bill / MHA (optional):</label>
-    <input type="number" id="mha" placeholder="e.g., 2200">
-  </div>
-
-  <div class="row">
-    <label for="rent">Rent:</label>
-    <input type="number" id="rent" placeholder="e.g., 1000">
-  </div>
-
-  <div class="row">
-    <label for="expenses">Other Expenses:</label>
-    <input type="number" id="expenses" placeholder="e.g., 500">
-  </div>
-
-  <div class="buttons">
-    <button id="calcBtn">Calculate</button>
-    <button id="resetBtn">Reset</button>
-  </div>
-
-  <h2 id="result" class="neutral"></h2>
-  <p id="message"></p>
-  <p id="savings"></p>
-  <div id="breakdown"></div>
 
   <script src="script.js"></script>
-</body>
+
+ </body>
 </html>

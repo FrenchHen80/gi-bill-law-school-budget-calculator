@@ -1,3 +1,9 @@
+const mhaData = {
+  udm: 2200,
+  umich: 2400,
+  wayne: 2100,
+  msu: 1800
+};
 function money(n) {
   return "$" + n.toLocaleString("en-US");
 }
@@ -19,7 +25,7 @@ function calculate() {
   let remaining = totalIncome - totalSpent;
 
   let resultEl = document.getElementById("result");
-  resultEl.innerText = "Money Left: " + money(remaining);
+  resultEl.innerText = money(remaining);
 
   resultEl.className = "neutral";
   if (remaining > 0) resultEl.className = "positive";
@@ -50,6 +56,26 @@ if (totalIncome === 0) {
   } else {
     savingsEl.innerText = "Shortfall: " + Math.abs(rate) + "% of income";
   }
+
+let rentAdvice = document.getElementById("rentAdvice");
+
+if (totalIncome === 0) {
+  rentAdvice.innerText = "";
+} else {
+  let rentPct = (rent / totalIncome) * 100;
+
+  if (rentPct > 40) {
+    rentAdvice.innerText = "Warning: Rent is above 40% of income.";
+    rentAdvice.className = "bad";
+  } else if (rentPct > 30) {
+    rentAdvice.innerText = "Caution: Rent is moderately high.";
+    rentAdvice.className = "ok";
+  } else {
+    rentAdvice.innerText = "Rent is within a healthy range.";
+    rentAdvice.className = "good";
+  }
+}
+
 }
 
   document.getElementById("breakdown").innerHTML = `
@@ -65,6 +91,7 @@ function resetAll() {
   document.getElementById("mha").value = "";
   document.getElementById("rent").value = "";
   document.getElementById("expenses").value = "";
+  document.getElementById("rentAdvice").innerText = "";
 
   let resultEl = document.getElementById("result");
   resultEl.innerText = "";
@@ -83,3 +110,19 @@ document.getElementById("resetBtn").onclick = resetAll;
 document.addEventListener("keydown", function (e) {
   if (e.key === "Enter") calculate();
 });
+document.getElementById("school").onchange = function() {
+    let school = this.value;
+    let mhaInput = document.getElementById("mha");
+
+    if (mhaData[school]) {
+     mhaInput.value = mhaData[school];
+
+    // Add highlight
+     mhaInput.classList.add("highlight");
+
+    // Remove highlight after 1 second
+    setTimeout(() => {
+      mhaInput.classList.remove("highlight");
+    }, 1000);
+  }
+};
