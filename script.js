@@ -90,23 +90,25 @@ if (totalIncome === 0) {
     <p>Other Expenses: <strong>${money(expenses)}</strong> (${pct(expenses, totalIncome)} of income)</p>
   `;
 }
-
 function resetAll() {
-    document.getElementById("income").value = "";
-    document.getElementById("mha").value = "";
-    document.getElementById("rent").value = "";
-    document.getElementById("expenses").value = "";
-    
+  document.getElementById("income").value = "";
+  document.getElementById("mha").value = "";
+  document.getElementById("rent").value = "";
+  document.getElementById("expenses").value = "";
 
-    const resultEl = document.getElementById("result");
-    resultEl.textContent = "";
-    resultEl.className = "value neutral";
+  const resultEl = document.getElementById("result");
+  resultEl.textContent = "";                 // or "$0" if you want a default
+  resultEl.className = "value neutral";
 
-    resultEl.innerText = "$0";
   document.getElementById("message").textContent = "";
   document.getElementById("savings").textContent = "";
-  document.getElementById("breakdown").textContent = "";
+  document.getElementById("breakdown").innerHTML = "";   // important
   document.getElementById("rentAdvice").textContent = "";
+
+  // Optional: reset dropdown too
+  // document.getElementById("school").value = "";
+}
+
    
 }
 
@@ -138,6 +140,7 @@ document.getElementById("school").onchange = function() {
     }, 1000);
   }
 };
+
 
 
 
