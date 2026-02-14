@@ -236,3 +236,19 @@ body {
   box-shadow: 0 0 0 3px rgba(99,102,241,0.3);
   transition: all 0.3s ease;
 }
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
