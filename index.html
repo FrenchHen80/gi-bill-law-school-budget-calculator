@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GI Bill Law School Budget Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ <div class="container">
+  
+ <h1>GI Bill Law School Budget Calculator</h1>
+
+ <p class="subtitle">
+  Estimate your monthly budget using GI Bill housing allowance and expenses
+</p>
+
+  <div class="row">
+    <label for="income">Monthly Income:</label>
+    <input type="number" id="income" placeholder="e.g., 2000">
+  </div>
+
+  <div class="row">
+    <label for="mha">GI Bill / MHA (optional):</label>
+    <input type="number" id="mha" placeholder="e.g., 2200">
+  </div>
+
+  <div class="row">
+    <label for="rent">Rent:</label>
+    <input type="number" id="rent" placeholder="e.g., 1000">
+  </div>
+
+  <div class="row">
+    <label for="expenses">Other Expenses:</label>
+    <input type="number" id="expenses" placeholder="e.g., 500">
+  </div>
+
+  <div class="buttons">
+    <button id="calcBtn">Calculate</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+
+  <h2 id="result" class="neutral"></h2>
+  <p id="message"></p>
+  <p id="savings"></p>
+  <div id="breakdown"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
