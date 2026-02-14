@@ -14,7 +14,12 @@ function pct(part, total) {
 }
 
 function calculate() {
-
+// 🔥 TRACK EVENT
+   gtag('event', 'calculate_click', {
+      'event_category': 'engagement',
+      'event_label': 'calculator used'
+   });
+  
   let income = Number(document.getElementById("income").value) || 0;
   let mha = Number(document.getElementById("mha").value) || 0;
   let rent = Number(document.getElementById("rent").value) || 0;
@@ -126,3 +131,4 @@ document.getElementById("school").onchange = function() {
     }, 1000);
   }
 };
+
