@@ -61,28 +61,30 @@
      <small class="helper">Used to estimate your monthly housing allowance (MHA)</small>
     </div>
 
-      <div class="grid">
-        <div class="row">
-          <label for="income">Monthly Income</label>
-          <input type="number" id="income" placeholder="0.00" inputmode="numeric">
-        </div>
+      <div class="row">
+  <label for="mha">GI Bill / MHA</label>
+  <div class="input-group">
+    <span>$</span>
+    <input type="number" id="mha" placeholder="0.00" inputmode="numeric">
+  </div>
+  <small class="helper">Based on selected school's ZIP code</small>
+</div>
 
-        <div class="row">
-           <label for="mha">GI Bill / MHA</label>
-           <input type="number" id="mha" placeholder="0.00" inputmode="numeric">
-           <small class="helper">Based on selected school's ZIP code</small>
-        </div>
+<div class="row">
+  <label for="rent">Rent</label>
+  <div class="input-group">
+    <span>$</span>
+    <input type="number" id="rent" placeholder="0.00" inputmode="numeric">
+  </div>
+</div>
 
-        <div class="row">
-          <label for="rent">Rent</label>
-          <input type="number" id="rent" placeholder="0.00" inputmode="numeric">
-        </div>
-
-        <div class="row">
-          <label for="expenses">Other Expenses</label>
-          <input type="number" id="expenses" placeholder="0.00" inputmode="numeric">
-        </div>
-      </div>
+<div class="row">
+  <label for="expenses">Other Expenses</label>
+  <div class="input-group">
+    <span>$</span>
+    <input type="number" id="expenses" placeholder="0.00" inputmode="numeric">
+  </div>
+</div>
 
       <div class="buttons">
         <button id="calcBtn" class="btn primary">Calculate</button>
@@ -128,6 +130,7 @@
  </body>
 
 </html>
+
 
 
 
