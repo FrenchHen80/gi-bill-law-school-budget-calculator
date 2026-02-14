@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gibillawcalculator.com/sitemap.xml
