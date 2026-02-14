@@ -98,7 +98,8 @@ function resetAll() {
   document.getElementById("expenses").value = "";
   document.getElementById("rentAdvice").innerText = "";
 
-  let resultEl = document.getElementById("result");
+  let resultEl = document.getElementById("result").value = "0";
+}
   resultEl.innerText = "";
   resultEl.className = "neutral";
 
@@ -131,4 +132,5 @@ document.getElementById("school").onchange = function() {
     }, 1000);
   }
 };
+
 
