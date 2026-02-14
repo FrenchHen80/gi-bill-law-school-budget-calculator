@@ -61,11 +61,19 @@
      <small class="helper">Used to estimate your monthly housing allowance (MHA)</small>
     </div>
 
+        <div class="row">
+  <label for="income">Monthly Income</label>
+  <div class="input-group">
+    <span>$</span>
+    <input type="number" id="income" placeholder="0.00" inputmode="numeric">
+  </div>
+</div>
+        
       <div class="row">
   <label for="mha">GI Bill / MHA</label>
   <div class="input-group">
     <span>$</span>
-    <input type="number" id="mha" placeholder="0.00" inputmode="numeric">
+    <input type="number" id="mha" placeholder="0.00" inputmode="numeric" step="100" min="0">
   </div>
   <small class="helper">Based on selected school's ZIP code</small>
 </div>
@@ -74,7 +82,7 @@
   <label for="rent">Rent</label>
   <div class="input-group">
     <span>$</span>
-    <input type="number" id="rent" placeholder="0.00" inputmode="numeric">
+    <input type="number" id="rent" placeholder="0.00" inputmode="numeric" step="50" min="0">
   </div>
 </div>
 
@@ -82,7 +90,7 @@
   <label for="expenses">Other Expenses</label>
   <div class="input-group">
     <span>$</span>
-    <input type="number" id="expenses" placeholder="0.00" inputmode="numeric">
+    <input type="number" id="expenses" placeholder="0.00" inputmode="numeric" step="50" min="0">
   </div>
 </div>
 
@@ -130,6 +138,7 @@
  </body>
 
 </html>
+
 
 
 
