@@ -449,6 +449,27 @@ html, body {
   padding-left: 24px; /* make room for $ */
 }
 
+.input-group {
+  position: relative;
+}
+
+.input-group span {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.input-group input {
+  padding-left: 26px; /* space for $ */
+}
+input[type="number"] {
+  appearance: textfield;
+}
+
 
 
 
